@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Card } from "expo-atlas";
+import { Trans } from "@lingui/react/macro";
 import { Clock, DollarSign, Info } from "lucide-react-native";
 
 interface Service {
@@ -13,12 +13,12 @@ interface Service {
 }
 
 interface ServiceSelectionProps {
-  onServiceSelect?: (service: Service) => void;
+  onSelectService?: (service: Service) => void;
   services?: Service[];
 }
 
 export default function ServiceSelection({
-  onServiceSelect = () => {},
+  onSelectService = () => {},
   services = [
     {
       id: "1",
@@ -66,7 +66,7 @@ export default function ServiceSelection({
   return (
     <View className="bg-white p-4 rounded-lg shadow-sm">
       <Text className="text-2xl font-bold mb-4 text-center">
-        Select a Service
+        <Trans>Select a Service</Trans>
       </Text>
 
       {/* Filter Tabs */}
@@ -78,7 +78,7 @@ export default function ServiceSelection({
           <Text
             className={`${activeFilter === "all" ? "text-white" : "text-gray-700"}`}
           >
-            All
+            <Trans>All</Trans>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -88,7 +88,7 @@ export default function ServiceSelection({
           <Text
             className={`${activeFilter === "free" ? "text-white" : "text-gray-700"}`}
           >
-            Free
+            <Trans>Free</Trans>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -98,7 +98,7 @@ export default function ServiceSelection({
           <Text
             className={`${activeFilter === "paid" ? "text-white" : "text-gray-700"}`}
           >
-            Paid
+            <Trans>Paid</Trans>
           </Text>
         </TouchableOpacity>
       </View>
@@ -108,16 +108,16 @@ export default function ServiceSelection({
         {filteredServices.map((service) => (
           <TouchableOpacity
             key={service.id}
-            onPress={() => onServiceSelect(service)}
+            onPress={() => onSelectService(service)}
             className="mb-4"
           >
-            <Card className="p-4 border border-gray-200 rounded-lg">
+            <View className="p-4 border border-gray-200 rounded-lg bg-white shadow-sm">
               <View className="flex-row justify-between items-center mb-2">
                 <Text className="text-lg font-semibold">{service.name}</Text>
                 {service.type === "free" ? (
                   <View className="bg-green-100 px-2 py-1 rounded">
                     <Text className="text-green-700 text-xs font-medium">
-                      FREE
+                      <Trans>FREE</Trans>
                     </Text>
                   </View>
                 ) : (
@@ -128,13 +128,15 @@ export default function ServiceSelection({
                 )}
               </View>
 
-              <Text className="text-gray-600 mb-3">{service.description}</Text>
+              <Text className="text-gray-600 mb-3">
+                <Trans>{service.description}</Trans>
+              </Text>
 
               <View className="flex-row items-center">
                 <Clock size={16} color="#4B5563" />
                 <Text className="text-gray-600 ml-1">{service.duration}</Text>
               </View>
-            </Card>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -143,7 +145,7 @@ export default function ServiceSelection({
       <View className="flex-row items-center justify-center mt-4 bg-blue-50 p-3 rounded-lg">
         <Info size={16} color="#3B82F6" />
         <Text className="text-blue-600 ml-2 text-sm">
-          Select a service to continue booking
+          <Trans>Select a service to continue booking</Trans>
         </Text>
       </View>
     </View>

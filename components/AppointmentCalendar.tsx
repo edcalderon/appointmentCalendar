@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { Calendar } from "expo-atlas";
+import { Trans } from "@lingui/react/macro";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react-native";
 
 interface TimeSlot {
@@ -62,18 +62,17 @@ const AppointmentCalendar = ({
   return (
     <View className="bg-white p-4 rounded-lg shadow-sm">
       <Text className="text-xl font-bold mb-4 text-center">
-        Select Date & Time
+        <Trans>Select Date & Time</Trans>
       </Text>
 
       {/* Calendar Component */}
-      <View className="mb-6">
-        <Calendar
-          selectedDate={currentDate}
-          onSelectDate={handleDateChange}
-          minDate={minDate}
-          maxDate={maxDate}
-          markedDates={availableDates}
-        />
+      <View className="mb-6 bg-gray-50 p-4 rounded-lg">
+        <Text className="text-center text-gray-600 mb-2">
+          <Trans>Calendar component placeholder</Trans>
+        </Text>
+        <Text className="text-center text-sm text-gray-500">
+          <Trans>Selected:</Trans> {formatDate(currentDate)}
+        </Text>
       </View>
 
       {/* Selected Date Display */}
@@ -106,7 +105,9 @@ const AppointmentCalendar = ({
       </View>
 
       {/* Time Slots */}
-      <Text className="text-lg font-semibold mb-2">Available Time Slots</Text>
+      <Text className="text-lg font-semibold mb-2">
+        <Trans>Available Time Slots</Trans>
+      </Text>
       <ScrollView className="max-h-48">
         <View className="flex-row flex-wrap justify-between">
           {timeSlots.map((slot) => (
@@ -131,15 +132,21 @@ const AppointmentCalendar = ({
       <View className="mt-4 flex-row justify-between">
         <View className="flex-row items-center">
           <View className="w-4 h-4 rounded-full bg-sky-100 mr-2" />
-          <Text className="text-sm text-gray-600">Available</Text>
+          <Text className="text-sm text-gray-600">
+            <Trans>Available</Trans>
+          </Text>
         </View>
         <View className="flex-row items-center">
           <View className="w-4 h-4 rounded-full bg-gray-100 mr-2" />
-          <Text className="text-sm text-gray-600">Unavailable</Text>
+          <Text className="text-sm text-gray-600">
+            <Trans>Unavailable</Trans>
+          </Text>
         </View>
         <View className="flex-row items-center">
           <View className="w-4 h-4 rounded-full border-2 border-sky-500 mr-2" />
-          <Text className="text-sm text-gray-600">Selected</Text>
+          <Text className="text-sm text-gray-600">
+            <Trans>Selected</Trans>
+          </Text>
         </View>
       </View>
     </View>

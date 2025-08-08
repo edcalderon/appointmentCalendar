@@ -1,0 +1,110 @@
+/*eslint-disable*/ export const messages = {
+  "Book Appointment": "Reservar Cita",
+  "Book Your Appointment": "Reserva tu Cita",
+  "Select Service": "Seleccionar Servicio",
+  "Choose Time": "Elegir Hora",
+  "Your Details": "Tus Datos",
+  "Select a Service": "Selecciona un Servicio",
+  All: "Todos",
+  Free: "Gratis",
+  Paid: "Pagado",
+  FREE: "GRATIS",
+  "Select a service to continue booking":
+    "Selecciona un servicio para continuar con la reserva",
+  "Initial Consultation": "Consulta Inicial",
+  "A free 15-minute consultation to discuss your needs":
+    "Una consulta gratuita de 15 minutos para discutir tus necesidades",
+  "Standard Appointment": "Cita Estándar",
+  "Regular 30-minute appointment session":
+    "Sesión de cita regular de 30 minutos",
+  "Extended Session": "Sesión Extendida",
+  "In-depth 60-minute appointment session":
+    "Sesión de cita profunda de 60 minutos",
+  "Quick Follow-up": "Seguimiento Rápido",
+  "Brief follow-up session for existing clients":
+    "Sesión de seguimiento breve para clientes existentes",
+  "Select Date & Time": "Seleccionar Fecha y Hora",
+  "Calendar component placeholder":
+    "Marcador de posición del componente de calendario",
+  "Selected:": "Seleccionado:",
+  "Available Time Slots": "Horarios Disponibles",
+  Available: "Disponible",
+  Unavailable: "No Disponible",
+  Selected: "Seleccionado",
+  "Personal Information": "Información Personal",
+  "First Name": "Nombre",
+  "Enter your first name": "Ingresa tu nombre",
+  "Last Name": "Apellido",
+  "Enter your last name": "Ingresa tu apellido",
+  Email: "Correo Electrónico",
+  "Enter your email": "Ingresa tu correo electrónico",
+  Phone: "Teléfono",
+  "Enter your phone number": "Ingresa tu número de teléfono",
+  "Additional Notes (Optional)": "Notas Adicionales (Opcional)",
+  "Any special requests or information":
+    "Cualquier solicitud especial o información",
+  "Proceed to Payment": "Proceder al Pago",
+  "Confirm Booking": "Confirmar Reserva",
+  "Back to Time Selection": "Volver a Selección de Hora",
+  "Payment Information": "Información de Pago",
+  "Booking Summary": "Resumen de Reserva",
+  "Card Number": "Número de Tarjeta",
+  "Expiry Date": "Fecha de Vencimiento",
+  CVC: "CVC",
+  Pay: "Pagar",
+  "& Confirm": "y Confirmar",
+  "Back to Personal Info": "Volver a Información Personal",
+  "Booking Confirmed!": "¡Reserva Confirmada!",
+  "Your appointment has been successfully booked. A confirmation email with all details has been sent to":
+    "Tu cita ha sido reservada exitosamente. Se ha enviado un correo de confirmación con todos los detalles a",
+  "Appointment Details": "Detalles de la Cita",
+  "Service:": "Servicio:",
+  "Date:": "Fecha:",
+  "Time:": "Hora:",
+  "Duration:": "Duración:",
+  "Total Paid:": "Total Pagado:",
+  "Price:": "Precio:",
+  "What's Next?": "¿Qué Sigue?",
+  "You'll receive a calendar invite shortly":
+    "Recibirás una invitación de calendario pronto",
+  "We'll send a reminder 24 hours before your appointment":
+    "Te enviaremos un recordatorio 24 horas antes de tu cita",
+  "Need to reschedule? Contact us at least 24 hours in advance":
+    "¿Necesitas reprogramar? Contáctanos al menos 24 horas antes",
+  "Book Another": "Reservar Otra",
+  "Return Home": "Volver al Inicio",
+  "Booking Failed": "Reserva Fallida",
+  "We're sorry, but there was an issue processing your booking. This could be due to a payment problem or a technical error.":
+    "Lo sentimos, pero hubo un problema procesando tu reserva. Esto podría deberse a un problema de pago o un error técnico.",
+  "Attempted Booking": "Reserva Intentada",
+  "What You Can Do:": "Lo Que Puedes Hacer:",
+  "Check your payment method and try again":
+    "Verifica tu método de pago e intenta de nuevo",
+  "Try selecting a different time slot":
+    "Intenta seleccionar un horario diferente",
+  "Contact our support team for assistance":
+    "Contacta a nuestro equipo de soporte para asistencia",
+  "Your time slot is still available for the next 10 minutes":
+    "Tu horario aún está disponible por los próximos 10 minutos",
+  "Try Again": "Intentar de Nuevo",
+  "Start Over": "Empezar de Nuevo",
+  "Contact Support": "Contactar Soporte",
+  "Select Country": "Seleccionar País",
+  Done: "Listo",
+  "Search countries...": "Buscar países...",
+  "First name is required": "El nombre es requerido",
+  "Last name is required": "El apellido es requerido",
+  "Email is required": "El correo electrónico es requerido",
+  "Please enter a valid email address":
+    "Por favor ingresa una dirección de correo válida",
+  "Phone number is required": "El número de teléfono es requerido",
+  "Please enter a valid phone number":
+    "Por favor ingresa un número de teléfono válido",
+  "Card number is required": "El número de tarjeta es requerido",
+  "Please enter a valid card number":
+    "Por favor ingresa un número de tarjeta válido",
+  "Expiry date is required": "La fecha de vencimiento es requerida",
+  "Please enter MM/YY format": "Por favor ingresa formato MM/AA",
+  "CVC is required": "El CVC es requerido",
+  "Please enter a valid CVC": "Por favor ingresa un CVC válido",
+};

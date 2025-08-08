@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { Stack } from "expo-router";
+import { Trans } from "@lingui/react/macro";
 import ServiceSelection from "../components/ServiceSelection";
 import AppointmentCalendar from "../components/AppointmentCalendar";
 import BookingForm from "../components/BookingForm";
+import LanguageSwitcher from "../src/components/LanguageSwitcher";
 
 // Mock data for services
 const mockServices = [
@@ -56,18 +58,27 @@ export default function BookingPage() {
     setCurrentStep(3);
   };
 
-  const handleBookingComplete = () => {
-    // Reset the booking flow
-    setCurrentStep(1);
-    setSelectedService(null);
-    setSelectedTimeSlot(null);
-    // Show success message or navigate to confirmation page
-    alert("Booking successful! Check your email for confirmation.");
+  const handleBookingComplete = (bookingData) => {
+    // Handle different booking outcomes
+    if (bookingData.status === "success") {
+      // Booking was successful - the BookingForm will show confirmation
+      console.log("Booking successful:", bookingData);
+    } else if (bookingData.status === "error") {
+      // Booking failed - the BookingForm will show error page
+      console.log("Booking failed:", bookingData);
+    }
+    // Don't reset immediately - let user see the confirmation/error page
   };
 
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+    }
+    // If coming back from booking form, reset selections
+    if (currentStep === 3) {
+      setSelectedService(null);
+      setSelectedTimeSlot(null);
+      setCurrentStep(1);
     }
   };
 
@@ -82,9 +93,10 @@ export default function BookingPage() {
       />
 
       <ScrollView className="flex-1">
+        <LanguageSwitcher />
         <View className="p-4">
           <Text className="text-2xl font-bold mb-6 text-center">
-            Book Your Appointment
+            <Trans>Book Your Appointment</Trans>
           </Text>
 
           {/* Progress indicator */}
@@ -95,7 +107,9 @@ export default function BookingPage() {
               >
                 <Text className="text-white font-bold">1</Text>
               </View>
-              <Text className="text-xs mt-1">Select Service</Text>
+              <Text className="text-xs mt-1">
+                <Trans>Select Service</Trans>
+              </Text>
             </View>
             <View className="flex-1 h-1 self-center mx-1 bg-gray-300">
               <View
@@ -109,7 +123,9 @@ export default function BookingPage() {
               >
                 <Text className="text-white font-bold">2</Text>
               </View>
-              <Text className="text-xs mt-1">Choose Time</Text>
+              <Text className="text-xs mt-1">
+                <Trans>Choose Time</Trans>
+              </Text>
             </View>
             <View className="flex-1 h-1 self-center mx-1 bg-gray-300">
               <View
@@ -123,7 +139,9 @@ export default function BookingPage() {
               >
                 <Text className="text-white font-bold">3</Text>
               </View>
-              <Text className="text-xs mt-1">Your Details</Text>
+              <Text className="text-xs mt-1">
+                <Trans>Your Details</Trans>
+              </Text>
             </View>
           </View>
 
@@ -142,11 +160,7 @@ export default function BookingPage() {
                 Selected Service: {selectedService?.name} (
                 {selectedService?.duration})
               </Text>
-              <AppointmentCalendar
-                serviceId={selectedService?.id}
-                onSelectTimeSlot={handleTimeSlotSelect}
-                onBack={handleBack}
-              />
+              <AppointmentCalendar onTimeSlotSelect={handleTimeSlotSelect} />
             </View>
           )}
 
@@ -162,9 +176,9 @@ export default function BookingPage() {
                 {selectedTimeSlot?.time}
               </Text>
               <BookingForm
-                service={selectedService}
-                timeSlot={selectedTimeSlot}
-                onComplete={handleBookingComplete}
+                selectedService={selectedService}
+                selectedDateTime={selectedTimeSlot}
+                onSubmit={handleBookingComplete}
                 onBack={handleBack}
               />
             </View>
