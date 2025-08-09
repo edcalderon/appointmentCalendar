@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function (api) {
   api.cache(true);
 
@@ -6,6 +8,17 @@ module.exports = function (api) {
       ["babel-preset-expo", { jsxImportSource: "nativewind" }],
       "nativewind/babel",
     ],
-    plugins: ["@lingui/babel-plugin-lingui-macro"],
+    plugins: [
+      [
+        'module-resolver',
+        {
+          root: ['.'],
+          alias: {
+            'expo-router/node/locales': './src/locales',
+          },
+        },
+      ],
+      "@lingui/babel-plugin-lingui-macro",
+    ],
   };
 };

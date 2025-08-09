@@ -5,7 +5,7 @@ module.exports = {
   catalogs: [
     {
       path: "<rootDir>/src/locales/{locale}/messages",
-      include: ["<rootDir>/app", "<rootDir>/components"],
+      include: ["<rootDir>/app", "<rootDir>/components", "<rootDir>/src"],
     },
   ],
   format: "po",

@@ -5,25 +5,11 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  useColorScheme,
 } from "react-native";
 import { Trans } from "@lingui/react/macro";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react-native";
-
-interface TimeSlot {
-  id: string;
-  time: string;
-  available: boolean;
-}
-
-interface AppointmentCalendarProps {
-  selectedDate?: Date;
-  onDateChange?: (date: Date) => void;
-  onTimeSlotSelect?: (timeSlot: TimeSlot) => void;
-  availableDates?: Date[];
-  timeSlots?: TimeSlot[];
-  minDate?: Date;
-  maxDate?: Date;
-}
+import { TimeSlot, AppointmentCalendarProps } from "../types/Calendar";
 
 const AppointmentCalendar = ({
   selectedDate = new Date(),
@@ -34,6 +20,7 @@ const AppointmentCalendar = ({
   minDate = new Date(),
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 3)),
 }: AppointmentCalendarProps) => {
+  const colorScheme = useColorScheme();
   const [currentDate, setCurrentDate] = useState<Date>(selectedDate);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot | null>(
     null,
@@ -60,17 +47,17 @@ const AppointmentCalendar = ({
   };
 
   return (
-    <View className="bg-white p-4 rounded-lg shadow-sm">
-      <Text className="text-xl font-bold mb-4 text-center">
+    <View className="p-4 rounded-lg shadow-sm bg-base-100">
+      <Text className="text-xl font-bold mb-4 text-center text-base-content">
         <Trans>Select Date & Time</Trans>
       </Text>
 
       {/* Calendar Component */}
-      <View className="mb-6 bg-gray-50 p-4 rounded-lg">
-        <Text className="text-center text-gray-600 mb-2">
+      <View className="mb-6 bg-base-200 p-4 rounded-lg">
+        <Text className="text-center text-gray-600 dark:text-gray-300 mb-2">
           <Trans>Calendar component placeholder</Trans>
         </Text>
-        <Text className="text-center text-sm text-gray-500">
+        <Text className="text-center text-sm text-gray-500 dark:text-gray-400">
           <Trans>Selected:</Trans> {formatDate(currentDate)}
         </Text>
       </View>
@@ -85,10 +72,10 @@ const AppointmentCalendar = ({
             if (prevDay >= minDate) handleDateChange(prevDay);
           }}
         >
-          <ChevronLeft size={24} color="#0284c7" />
+          <ChevronLeft size={24} color="text-gray-400 dark:text-gray-500" />
         </TouchableOpacity>
 
-        <Text className="text-lg font-semibold text-center">
+        <Text className="text-lg font-semibold text-center text-base-content">
           {formatDate(currentDate)}
         </Text>
 
@@ -100,12 +87,12 @@ const AppointmentCalendar = ({
             if (nextDay <= maxDate) handleDateChange(nextDay);
           }}
         >
-          <ChevronRight size={24} color="#0284c7" />
+          <ChevronRight size={24} color="text-gray-400 dark:text-gray-500" />
         </TouchableOpacity>
       </View>
 
       {/* Time Slots */}
-      <Text className="text-lg font-semibold mb-2">
+      <Text className="text-lg font-semibold mb-2 text-base-content">
         <Trans>Available Time Slots</Trans>
       </Text>
       <ScrollView className="max-h-48">
@@ -113,13 +100,13 @@ const AppointmentCalendar = ({
           {timeSlots.map((slot) => (
             <TouchableOpacity
               key={slot.id}
-              className={`m-1 p-3 rounded-md flex-row items-center ${slot.available ? "bg-sky-100" : "bg-gray-100"} ${selectedTimeSlot?.id === slot.id ? "border-2 border-sky-500" : ""}`}
+              className={`m-1 p-3 rounded-md flex-row items-center ${slot.available ? "bg-primary dark:bg-primary/30" : "bg-gray-100 dark:bg-slate-800"} ${selectedTimeSlot?.id === slot.id ? "border-2 border-primary dark:border-primary" : ""}`}
               onPress={() => handleTimeSlotSelect(slot)}
               disabled={!slot.available}
             >
-              <Clock size={16} color={slot.available ? "#0284c7" : "#9ca3af"} />
+              <Clock size={16} />
               <Text
-                className={`ml-2 ${slot.available ? "text-sky-700" : "text-gray-400"} ${selectedTimeSlot?.id === slot.id ? "font-bold" : ""}`}
+                className={`ml-2 ${slot.available ? "text-primary-content" : "text-gray-400 dark:text-gray-500"} ${selectedTimeSlot?.id === slot.id ? "font-bold" : ""}`}
               >
                 {slot.time}
               </Text>
@@ -131,20 +118,20 @@ const AppointmentCalendar = ({
       {/* Legend */}
       <View className="mt-4 flex-row justify-between">
         <View className="flex-row items-center">
-          <View className="w-4 h-4 rounded-full bg-sky-100 mr-2" />
-          <Text className="text-sm text-gray-600">
+          <View className="w-4 h-4 rounded-full bg-primary dark:bg-primary/30 mr-2" />
+          <Text className="text-sm text-base-content">
             <Trans>Available</Trans>
           </Text>
         </View>
         <View className="flex-row items-center">
-          <View className="w-4 h-4 rounded-full bg-gray-100 mr-2" />
-          <Text className="text-sm text-gray-600">
+          <View className="w-4 h-4 rounded-full bg-gray-400 mr-2" />
+          <Text className="text-sm text-base-content">
             <Trans>Unavailable</Trans>
           </Text>
         </View>
         <View className="flex-row items-center">
-          <View className="w-4 h-4 rounded-full border-2 border-sky-500 mr-2" />
-          <Text className="text-sm text-gray-600">
+          <View className="w-4 h-4 rounded-full border-2 border-primary dark:border-primary mr-2" />
+          <Text className="text-sm text-base-content">
             <Trans>Selected</Trans>
           </Text>
         </View>

@@ -1,46 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useLingui } from "@lingui/react";
 import { activateLocale } from "../i18n";
 
+// Compact, segmented pill toggle for EN/ES styled like ThemeSwitcher
 const LanguageSwitcher = () => {
   const { i18n } = useLingui();
-  const currentLocale = i18n.locale;
+  const current = (i18n as any)?.locale ?? "en";
+  const [uiLocale, setUiLocale] = useState<"en" | "es">(current === "es" ? "es" : "en");
 
-  const switchLanguage = async (locale: string) => {
-    await activateLocale(locale);
+  const onToggle = async (target: "en" | "es") => {
+    if (target !== uiLocale) {
+      // Reflect UI immediately for a snappy toggle
+      setUiLocale(target);
+      // Activate i18n (async)
+      await activateLocale(target);
+      if (typeof window !== "undefined" && "localStorage" in window) {
+        try {
+          window.localStorage.setItem("locale", target);
+        } catch {}
+      }
+    }
   };
 
+  // Sync UI state with i18n.locale changes
+  useEffect(() => {
+    const desired: "en" | "es" = (current === "es" ? "es" : "en");
+    setUiLocale(desired);
+  }, [current]);
+
+  // Also subscribe to Lingui i18n change events to reflect external changes
+  useEffect(() => {
+    const handler = () => {
+      const loc = (i18n as any)?.locale === "es" ? "es" : "en";
+      setUiLocale(loc);
+    };
+    try {
+      (i18n as any)?.on?.("change", handler);
+    } catch {}
+    return () => {
+      try {
+        (i18n as any)?.off?.("change", handler);
+      } catch {}
+    };
+  }, [i18n]);
+
   return (
-    <View className="flex-row justify-center space-x-2 p-4">
-      <TouchableOpacity
-        className={`px-4 py-2 rounded-lg ${
-          currentLocale === "en" ? "bg-blue-500" : "bg-gray-200"
-        }`}
-        onPress={() => switchLanguage("en")}
-      >
-        <Text
-          className={`${
-            currentLocale === "en" ? "text-white" : "text-gray-700"
-          }`}
+    <View className="flex-row items-center">
+      {/* Segmented pill like ThemeSwitcher */}
+      <View className="flex-row items-center rounded-full overflow-hidden border border-base-300">
+        <TouchableOpacity
+          onPress={() => onToggle("en")}
+          accessibilityRole="button"
+          accessibilityLabel="Switch language to English"
+          className={`px-3 py-1 ${uiLocale === "en" ? "bg-primary" : "bg-base-100"}`}
         >
-          English
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        className={`px-4 py-2 rounded-lg ${
-          currentLocale === "es" ? "bg-blue-500" : "bg-gray-200"
-        }`}
-        onPress={() => switchLanguage("es")}
-      >
-        <Text
-          className={`${
-            currentLocale === "es" ? "text-white" : "text-gray-700"
-          }`}
+          <Text className={`text-xs ${uiLocale === "en" ? "text-primary-content" : "text-base-content"}`}>EN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onToggle("es")}
+          accessibilityRole="button"
+          accessibilityLabel="Cambiar idioma a Español"
+          className={`px-3 py-1 ${uiLocale === "es" ? "bg-primary" : "bg-base-100"}`}
         >
-          Español
-        </Text>
-      </TouchableOpacity>
+          <Text className={`text-xs ${uiLocale === "es" ? "text-primary-content" : "text-base-content"}`}>ES</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
