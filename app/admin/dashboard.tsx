@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Filter,
 } from "lucide-react-native";
+import { Trans } from "@lingui/react/macro";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -67,33 +68,33 @@ export default function AdminDashboard() {
           <View className="space-y-6">
             <View className="flex-row flex-wrap justify-between">
               <StatCard
-                title="Total Appointments"
+                title={<Trans>Total Appointments</Trans>}
                 value={stats.totalAppointments}
                 icon={<Calendar size={20} color="#4f46e5" />}
               />
               <StatCard
-                title="Confirmed"
+                title={<Trans>Confirmed</Trans>}
                 value={stats.confirmedAppointments}
                 icon={<Clock size={20} color="#10b981" />}
               />
               <StatCard
-                title="Pending"
+                title={<Trans>Pending</Trans>}
                 value={stats.pendingAppointments}
                 icon={<Clock size={20} color="#f59e0b" />}
               />
               <StatCard
-                title="Revenue"
+                title={<Trans>Revenue</Trans>}
                 value={`$${stats.revenue}`}
                 icon={<CreditCard size={20} color="#6366f1" />}
               />
             </View>
 
-            <View className="bg-white rounded-lg p-4 shadow-sm">
+            <View className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-200">
               <View className="flex-row justify-between items-center mb-4">
-                <Text className="text-lg font-bold">Upcoming Appointments</Text>
+                <Text className="text-lg font-bold text-base-content"><Trans>Upcoming Appointments</Trans></Text>
                 <TouchableOpacity className="flex-row items-center">
                   <Filter size={16} color="#6b7280" />
-                  <Text className="text-sm text-gray-500 ml-1">Filter</Text>
+                  <Text className="text-sm text-base-content/60 ml-1"><Trans>Filter</Trans></Text>
                 </TouchableOpacity>
               </View>
 
@@ -105,8 +106,8 @@ export default function AdminDashboard() {
               ))}
 
               <TouchableOpacity className="mt-4">
-                <Text className="text-indigo-600 text-center">
-                  View All Appointments
+                <Text className="text-primary text-center">
+                  <Trans>View All Appointments</Trans>
                 </Text>
               </TouchableOpacity>
             </View>
@@ -114,8 +115,8 @@ export default function AdminDashboard() {
         );
       case "appointments":
         return (
-          <View className="bg-white rounded-lg p-4 shadow-sm">
-            <Text className="text-lg font-bold mb-4">All Appointments</Text>
+          <View className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-200">
+            <Text className="text-lg font-bold mb-4 text-base-content"><Trans>All Appointments</Trans></Text>
             {upcomingAppointments.map((appointment) => (
               <AppointmentCard key={appointment.id} appointment={appointment} />
             ))}
@@ -123,28 +124,28 @@ export default function AdminDashboard() {
         );
       case "customers":
         return (
-          <View className="bg-white rounded-lg p-4 shadow-sm">
-            <Text className="text-lg font-bold mb-4">Customer Management</Text>
-            <Text className="text-gray-500">
-              Manage your customer database here.
+          <View className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-200">
+            <Text className="text-lg font-bold mb-4 text-base-content"><Trans>Customer Management</Trans></Text>
+            <Text className="text-base-content/60">
+              <Trans>Manage your customer database here.</Trans>
             </Text>
           </View>
         );
       case "services":
         return (
-          <View className="bg-white rounded-lg p-4 shadow-sm">
-            <Text className="text-lg font-bold mb-4">Service Management</Text>
-            <Text className="text-gray-500">
-              Configure your services, pricing, and availability.
+          <View className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-200">
+            <Text className="text-lg font-bold mb-4 text-base-content"><Trans>Service Management</Trans></Text>
+            <Text className="text-base-content/60">
+              <Trans>Configure your services, pricing, and availability.</Trans>
             </Text>
           </View>
         );
       case "settings":
         return (
-          <View className="bg-white rounded-lg p-4 shadow-sm">
-            <Text className="text-lg font-bold mb-4">System Settings</Text>
-            <Text className="text-gray-500">
-              Configure booking rules, notifications, and Google Calendar sync.
+          <View className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-200">
+            <Text className="text-lg font-bold mb-4 text-base-content"><Trans>System Settings</Trans></Text>
+            <Text className="text-base-content/60">
+              <Trans>Configure booking rules, notifications, and Google Calendar sync.</Trans>
             </Text>
           </View>
         );
@@ -154,20 +155,20 @@ export default function AdminDashboard() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-base-100">
       <StatusBar style="auto" />
-      <View className="p-4 bg-indigo-600">
-        <Text className="text-2xl font-bold text-white">Admin Dashboard</Text>
-        <Text className="text-white opacity-80">
-          Manage your booking system
+      <View className="p-4 bg-primary">
+        <Text className="text-2xl font-bold text-primary-content"><Trans>Admin Dashboard</Trans></Text>
+        <Text className="text-primary-content/80">
+          <Trans>Manage your booking system</Trans>
         </Text>
       </View>
 
       <ScrollView className="flex-1 p-4">{renderTabContent()}</ScrollView>
 
-      <View className="flex-row justify-around bg-white border-t border-gray-200 py-2">
+      <View className="flex-row justify-around bg-base-100 border-t border-base-200 py-2">
         <NavButton
-          title="Overview"
+          title={<Trans>Overview</Trans>}
           icon={
             <BarChart2
               size={24}
@@ -178,7 +179,7 @@ export default function AdminDashboard() {
           onPress={() => setActiveTab("overview")}
         />
         <NavButton
-          title="Appointments"
+          title={<Trans>Appointments</Trans>}
           icon={
             <Calendar
               size={24}
@@ -189,7 +190,7 @@ export default function AdminDashboard() {
           onPress={() => setActiveTab("appointments")}
         />
         <NavButton
-          title="Customers"
+          title={<Trans>Customers</Trans>}
           icon={
             <Users
               size={24}
@@ -200,7 +201,7 @@ export default function AdminDashboard() {
           onPress={() => setActiveTab("customers")}
         />
         <NavButton
-          title="Services"
+          title={<Trans>Services</Trans>}
           icon={
             <CreditCard
               size={24}
@@ -211,7 +212,7 @@ export default function AdminDashboard() {
           onPress={() => setActiveTab("services")}
         />
         <NavButton
-          title="Settings"
+          title={<Trans>Settings</Trans>}
           icon={
             <Settings
               size={24}
@@ -226,13 +227,14 @@ export default function AdminDashboard() {
   );
 }
 
-const StatCard = ({ title = "", value = "0", icon = null }) => (
-  <View className="bg-white p-4 rounded-lg shadow-sm w-[48%] mb-4">
+type StatCardProps = { title: React.ReactNode; value: React.ReactNode; icon?: React.ReactNode };
+const StatCard = ({ title, value, icon }: StatCardProps) => (
+  <View className="bg-base-100 p-4 rounded-lg shadow-sm w-[48%] mb-4 border border-base-200">
     <View className="flex-row justify-between items-center">
-      <Text className="text-gray-500 text-sm">{title}</Text>
+      <Text className="text-base-content/60 text-sm">{title}</Text>
       {icon}
     </View>
-    <Text className="text-2xl font-bold mt-2">{value}</Text>
+    <Text className="text-2xl font-bold mt-2 text-base-content">{value}</Text>
   </View>
 );
 
@@ -247,13 +249,13 @@ const AppointmentCard = ({
     isPaid: false,
   },
 }) => (
-  <Pressable className="border-b border-gray-100 py-3">
+  <Pressable className="border-b border-base-200 py-3">
     <View className="flex-row justify-between items-center">
       <View>
         <Text className="font-medium">{appointment.customer}</Text>
-        <Text className="text-sm text-gray-500">{appointment.service}</Text>
+        <Text className="text-sm text-base-content/60">{appointment.service}</Text>
         <View className="flex-row items-center mt-1">
-          <Text className="text-xs text-gray-500">
+          <Text className="text-xs text-base-content/60">
             {appointment.date} • {appointment.time}
           </Text>
         </View>
@@ -271,7 +273,7 @@ const AppointmentCard = ({
         </View>
         {appointment.isPaid && (
           <View className="rounded-full bg-blue-100 px-2 py-1">
-            <Text className="text-xs text-blue-800">Paid</Text>
+            <Text className="text-xs text-blue-800"><Trans>Paid</Trans></Text>
           </View>
         )}
         <ChevronRight size={16} color="#9ca3af" className="ml-2" />
@@ -280,12 +282,13 @@ const AppointmentCard = ({
   </Pressable>
 );
 
+type NavButtonProps = { title: React.ReactNode; icon?: React.ReactNode; active?: boolean; onPress?: () => void };
 const NavButton = ({
-  title = "",
-  icon = null,
+  title,
+  icon,
   active = false,
   onPress = () => {},
-}) => (
+}: NavButtonProps) => (
   <TouchableOpacity
     className={`items-center ${active ? "opacity-100" : "opacity-60"}`}
     onPress={onPress}
