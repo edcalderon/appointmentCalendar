@@ -39,6 +39,7 @@
     "expo-web-browser": "~14.1.6",
     "lightningcss": "^1.29.2",
     "lucide-react-native": "^0.479.0",
+    "make-plural": "^7.4.0",
     "nativewind": "^4.1.23",
     "postcss": "^8.5.3",
     "react": "19.0.0",

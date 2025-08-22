@@ -1,10 +1,17 @@
 import { i18n } from "@lingui/core";
-import { en, es } from "make-plural/plurals";
+import * as plurals from "make-plural/plurals";
+import { messages as enMessages } from "./locales/en/messages";
+import { messages as esMessages } from "./locales/es/messages";
 
 i18n.loadLocaleData({
-  en: { plurals: en },
-  es: { plurals: es },
+  en: { plurals: plurals.en },
+  es: { plurals: plurals.es },
 });
+
+const messages = {
+  en: enMessages,
+  es: esMessages,
+};
 
 /**
  * Load messages for requested locale and activate it.
@@ -12,9 +19,11 @@ i18n.loadLocaleData({
  * many ways how to load messages — from REST API, from file, from cache, etc.
  */
 export async function activateLocale(locale: string) {
-  const { messages } = await import(`./locales/${locale}/messages`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
+  const localeMessages = messages[locale as keyof typeof messages];
+  if (localeMessages) {
+    i18n.load(locale, localeMessages);
+    i18n.activate(locale);
+  }
 }
 
 // Initialize with English as default
